@@ -20,8 +20,9 @@ class ChuteONumero:
             elif int(self.valor_do_chute) < self.valor_aleatorio:
                 print('Chute um valor mais alto')
                 self.PedirValorAleatorio()
-            self.tentar_novamente = False
-            print("Acertou Mizeravi")
+            if int(self.valor_do_chute) == self.valor_aleatorio:
+                self.tentar_novamente = False
+                print("Acertou Mizeravi")
     def PedirValorAleatorio(self):
         self.valor_do_chute = input("Chute  um Numero: ")
 
