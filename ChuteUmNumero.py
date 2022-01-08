@@ -11,7 +11,7 @@ class ChuteONumero:
 
     def iniciar(self):
         self.GeraNumeroAleatorio()
-        self.PedirValorAleatorio()15
+        self.PedirValorAleatorio()
         while self.tentar_novamente == True:
 
             if int(self.valor_do_chute) > self.valor_aleatorio:
@@ -20,7 +20,7 @@ class ChuteONumero:
             elif int(self.valor_do_chute) < self.valor_aleatorio:
                 print('Chute um valor mais alto')
                 self.PedirValorAleatorio()
-            self.tentar_novamente == False
+            self.tentar_novamente = False
             print("Acertou Mizeravi")
     def PedirValorAleatorio(self):
         self.valor_do_chute = input("Chute  um Numero: ")
