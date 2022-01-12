@@ -1,55 +1,46 @@
 import random
 import PySimpleGUI as sg
-
-class WhatTheNumber:
+class ChuteONumero:
     def __init__(self):
-        self.r_n = 0
-        self.n_min = 1
-        self.n_max = 100
-        self.try_again = True
+        self.valor_aleatorio = 0
+        self.valor_minimo = 1
+        self.valor_maximo = 100
+        self.tentar_novamente = True
 
     def iniciar(self):
-        # Layout
+        # layout
         self.layout = [
-            [sg.Text("What is the number", size=(20,0))],
-            [sg.Input(size=(18,0),key=("ValueR"))],
-            [sg.Button("Try!")],
-            [sg.Output(size=(20,10))]
+            [sg.Text("Chute o Numero", size=(25,0))],
+            [sg.Input(size=(22,0), key="ValorChute")],
+            [sg.Button("Chutar!")],
+            [sg.Output(size=(20,20))]
         ]
-        # Criar a jenla
-        self.window = sg.Window("WTN", layout=self.layout)
-        # Criar o numero
-        self.RN()
+        self.janela = sg.Window("Chute!", layout=self.layout)
+        self.GerarNumeroAleatorio()
         try:
             while True:
-                self.WindowRead()
-                if self.eventos == "Try!":
-                    self.trie = self.valores['ValueR']
-                    while self.try_again == True:
-                        if int(self.trie) > self.r_n:
-                            print("Down")
+                self.LerValoresNaJanela()
+                if self.eventos == "Chutar!":
+                    self.valor_chute = self.valores['ValorChute']
+                    while self.tentar_novamente == True:
+                        if int(self.valor_chute) > self.valor_aleatorio:
+                            print("Digite um numero menor")
                             break
-                        elif int(self.trie) < self.r_n:
-                            print('UP')
+                        elif int(self.valor_chute) < self.valor_aleatorio:
+                            print("Digite um numero maior")
                             break
-                        if int(self.trie) == self.r_n:
-                            self.try_again = False
-                            print("Alright")
-
+                        if int(self.valor_chute) == self.valor_aleatorio:
+                            self.tentar_novamente = False
+                            print("Acertou!")
+                            break
         except:
-            print("only numbers pls")
+            print("Digite Apenas numeros")
             self.iniciar()
 
+    def LerValoresNaJanela(self):
+        self.eventos,self.valores = self.janela.Read()
+    def GerarNumeroAleatorio(self):
+        self.valor_aleatorio = random.randint(self.valor_minimo, self.valor_maximo)
 
-
-
-
-    # Ler valores da janela
-    def WindowRead(self):
-        self.eventos,self.valores = self.window.Read()
-    # Gerar numero aleatorio
-    def RN(self):
-        self.r_n = random.randint(self.n_min, self.n_max)
-
-what = WhatTheNumber()
-what.iniciar()
+chute = ChuteONumero()
+chute.iniciar()
